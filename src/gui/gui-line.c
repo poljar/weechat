@@ -1703,6 +1703,18 @@ gui_line_hdata_line_data_update_cb (void *data,
         update_coords = 1;
     }
 
+    if (hashtable_has_key (hashtable, "highlight"))
+    {
+        value = hashtable_get (hashtable, "highlight");
+
+        if (*value == '0')
+            value = NULL;
+
+        hdata_set (hdata, pointer, "highlight", value);
+        rc++;
+        update_coords = 1;
+    }
+
     if (rc > 0)
     {
         if (update_coords)
@@ -1745,7 +1757,7 @@ gui_line_hdata_line_data_cb (const void *pointer, void *data,
         HDATA_VAR(struct t_gui_line_data, tags_count, INTEGER, 0, NULL, NULL);
         HDATA_VAR(struct t_gui_line_data, tags_array, SHARED_STRING, 1, "tags_count", NULL);
         HDATA_VAR(struct t_gui_line_data, displayed, CHAR, 0, NULL, NULL);
-        HDATA_VAR(struct t_gui_line_data, highlight, CHAR, 0, NULL, NULL);
+        HDATA_VAR(struct t_gui_line_data, highlight, CHAR, 1, NULL, NULL);
         HDATA_VAR(struct t_gui_line_data, refresh_needed, CHAR, 0, NULL, NULL);
         HDATA_VAR(struct t_gui_line_data, prefix, SHARED_STRING, 1, NULL, NULL);
         HDATA_VAR(struct t_gui_line_data, prefix_length, INTEGER, 0, NULL, NULL);
